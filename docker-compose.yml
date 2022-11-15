@@ -1,0 +1,17 @@
+version: '3.1'
+
+services:
+  postgres:
+    container_name: task-db
+    image: postgres
+    ports:
+      - "5431:5432"
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=tasks
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
